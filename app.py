@@ -1,13 +1,16 @@
 from flask import Flask, jsonify, request
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required
 from flask_swagger_ui import get_swaggerui_blueprint
+import os
+
+
 
 app = Flask(__name__)
 
 
 # Clé secrète pour signer les tokens JWT jsonwebtoken
 
-app.config['JWT_SECRET_KEY'] = 'secret-key'  # Change cette clé dans un vrai projet
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'default-secret')  # Change cette clé dans un vrai projet
 jwt = JWTManager(app)
 
 
